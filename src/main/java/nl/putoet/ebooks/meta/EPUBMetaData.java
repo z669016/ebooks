@@ -1,7 +1,7 @@
 package nl.putoet.ebooks.meta;
 
+import nl.siegmann.epublib.domain.Author;
 import nl.siegmann.epublib.domain.Book;
-import nl.siegmann.epublib.domain.CreatorContributor;
 import nl.siegmann.epublib.epub.EpubReader;
 
 import java.io.FileInputStream;
@@ -18,15 +18,15 @@ public class EPUBMetaData implements MetaData {
             final Book book = epubReader.readEpub(is);
             return new EPUBMetaData(book);
         } catch (IOException exc) {
-            throw new IllegalArgumentException(exc.getMessage());
+            throw new IllegalArgumentException(exc);
         }
     }
 
     public static MetaData getInstance(final Path path)  {
         try (final InputStream is = new FileInputStream(path.toFile())) {
             return getInstance(is);
-        } catch (IOException e) {
-            throw new IllegalArgumentException(e.getMessage());
+        } catch (IOException exc) {
+            throw new IllegalArgumentException(exc);
         }
     }
 
@@ -36,7 +36,7 @@ public class EPUBMetaData implements MetaData {
     private EPUBMetaData(final Book book) {
         this.title = book.getTitle();
 
-        final List<CreatorContributor> authors = book.getMetadata().getAuthors();
+        final List<Author> authors = book.getMetadata().getAuthors();
         this.authors = authors.stream().map(author -> author.getFirstname() + " " + author.getLastname()).collect(Collectors.toList());
     }
 
