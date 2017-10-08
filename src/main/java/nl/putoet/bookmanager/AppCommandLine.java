@@ -4,7 +4,12 @@ import org.apache.commons.cli.*;
 
 public class AppCommandLine {
     private static final Option SYSTEM = new Option("s", "system", false,"Check hidden folders");
-    private static final Option MISSING = new Option("m", "missing", false,"Print missing formats");
+    private static final Option ALL = new Option("a", "all", false,"All titles formats");
+    private static final Option DUPLICATES = new Option("d", "duplicate", false,"Titles with duplicates");
+    private static final Option MISSING = new Option("m", "missing", false,"Titles with missing formats");
+    private static final Option VERBOSE = new Option("v", "verbose", false,"Verbose logging");
+    private static final Option RECURSIVE = new Option("r", "recursive", false,"Search sub folders");
+    private static final Option HELP = new Option("h", "help", false,"Command details");
 
     private final Options options;
     private final CommandLine commandLine;
@@ -14,19 +19,39 @@ public class AppCommandLine {
         this.commandLine = commandLine;
     }
 
-    public String[] getCommands() {
+    String[] getCommands() {
         return commandLine.getArgs();
     }
 
-    public boolean searchSystemFolders() {
+    boolean searchSystemFolders() {
         return commandLine.hasOption(SYSTEM.getOpt());
     }
 
-    public boolean missingFormats() {
+    boolean allFormats() {
+        return commandLine.hasOption(ALL.getOpt());
+    }
+
+    boolean duplicateFormats() {
+        return commandLine.hasOption(DUPLICATES.getOpt());
+    }
+
+    boolean missingFormats() {
         return commandLine.hasOption(MISSING.getOpt());
     }
 
-    public void help() {
+    boolean verbose() {
+        return commandLine.hasOption(VERBOSE.getOpt());
+    }
+
+    boolean recursive() {
+        return commandLine.hasOption(RECURSIVE.getOpt());
+    }
+
+    boolean help() {
+        return commandLine.hasOption(HELP.getOpt());
+    }
+
+    void showHelp() {
         help(options);
     }
 
@@ -47,7 +72,12 @@ public class AppCommandLine {
         final Options options = new Options();
 
         options.addOption(SYSTEM);
+        options.addOption(ALL);
         options.addOption(MISSING);
+        options.addOption(DUPLICATES);
+        options.addOption(VERBOSE);
+        options.addOption(RECURSIVE);
+        options.addOption(HELP);
 
         return options;
     }

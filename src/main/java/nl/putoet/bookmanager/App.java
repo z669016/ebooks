@@ -10,15 +10,15 @@ import java.nio.file.*;
 import java.util.function.Predicate;
 
 public class App {
-    protected final AppCommandLine commandLine;
-    protected final PathFilter filter = new PathFilter();
+    final AppCommandLine commandLine;
+    final PathFilter filter = new PathFilter();
 
-    private final Predicate<Path> filterSystemFolders = path -> {
+    final Predicate<Path> filterSystemFolders = path -> {
         final File file = path.toFile();
         return !file.isDirectory() || (file.isDirectory() && !file.getName().startsWith("."));
     };
 
-    public App(final AppCommandLine commandLine) {
+    App(final AppCommandLine commandLine) {
         this.commandLine = commandLine;
 
         if (!commandLine.searchSystemFolders()) {
@@ -33,33 +33,58 @@ public class App {
             for (Path entry : stream) {
                 if (filter.test(entry)) {
                     if (entry.toFile().isDirectory()) {
+                        if (commandLine.recursive())
                         list.addAll(list(entry));
                     } else {
-                        if (Format.isValidEbook(entry))
+                        if (Format.isValidEbook(entry)) {
+                            verboseProgressNext();
                             list.add(entry);
+                        }
                     }
                 }
             }
-        } catch (IOException ex) {
-            System.out.println("IO Error during parsing of folder '" + path + "' " + ex.getMessage());
-        } catch (DirectoryIteratorException ex) {
-            System.out.println("Error during parsing of folder '" + path + "' " + ex.getMessage());
+        } catch (IOException exc) {
+            System.out.println("IO Error during parsing of folder '" + path + "' " + exc.getMessage());
+        } catch (DirectoryIteratorException exc) {
+            System.out.println("Error during parsing of folder '" + path + "' " + exc.getMessage());
         }
 
         return list;
     }
 
-    public void print(final EBookTitleList list) {
+    private void verboseProgressNext() {
+        if (commandLine.verbose())
+            System.out.print(".");
+    }
+
+    void print(final EBookTitleList list) {
+        if (commandLine.verbose())
+            System.out.println();
+
         System.out.println("EBook title list for " + list.root);
 
+        if (commandLine.allFormats()) {
+            System.out.println("All titles:");
+            System.out.println("-----------");
+            printTitles(list);
+        }
+
+        if (commandLine.missingFormats()) {
+            System.out.println("Missing formats:");
+            System.out.println("----------------");
+            printTitles(list.filter(EBookTitleList.missingFormats));
+        }
+
+        if (commandLine.duplicateFormats()) {
+            System.out.println("Duplicate formats:");
+            System.out.println("------------------");
+            printTitles(list.filter(EBookTitleList.duplicates));
+        }
+    }
+
+    private void printTitles(final EBookTitleList list) {
         for (EBookTitle title : list.getTitles()) {
-            if (commandLine.missingFormats()) {
-                final Format[] missing = Format.missing(title.getFormats());
-                if (missing.length > 0)
-                    System.out.println(title);
-            } else {
-                System.out.println(title);
-            }
+            System.out.println(title);
         }
     }
 }

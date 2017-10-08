@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
 public class AppTest {
     @Test
     public void testConstructorFilters() {
-        final String[] args = {"list", "./target/test-classes", "-s"};
+        final String[] args = {"list", "./target/test-classes", "-s", "-r"};
         final AppCommandLine commandLine = AppCommandLine.getInstance(args);
         final App app = new App(commandLine);
 
@@ -20,7 +20,7 @@ public class AppTest {
 
     @Test
     public void testList() {
-        final String[] args = {"list", "./target/test-classes", "-m"};
+        final String[] args = {"list", "./target/test-classes", "-m", "-r"};
         final AppCommandLine commandLine = AppCommandLine.getInstance(args);
         final App app = new App(commandLine);
 
