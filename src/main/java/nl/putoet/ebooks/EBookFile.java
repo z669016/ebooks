@@ -7,6 +7,7 @@ import nl.putoet.ebooks.meta.PDFMetaData;
 import org.apache.commons.io.FilenameUtils;
 
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.List;
 
 public class EBookFile implements MetaData {
@@ -27,16 +28,20 @@ public class EBookFile implements MetaData {
     }
 
     private static MetaData getMetaData(final Format format, final Path path) {
-        switch (format) {
-            case PDF:
-                return PDFMetaData.getInstance(path);
-            case EPUB:
-                return EPUBMetaData.getInstance(path);
-            case MOBI:
-                return MOBIMetaData.getInstance(path);
-            default:
-                throw new IllegalArgumentException("Unsupported format " + format);
-        }
+        try {
+            switch (format) {
+                case PDF:
+                    return PDFMetaData.getInstance(path);
+                case EPUB:
+                    return EPUBMetaData.getInstance(path);
+                case MOBI:
+                    return MOBIMetaData.getInstance(path);
+            }
+        } catch (IllegalArgumentException exc) { /* intentinally empry */ }
+
+        System.err.println("No meta data available for " + path);
+        System.err.flush();
+        return null;
     }
 
     @Override
@@ -46,11 +51,17 @@ public class EBookFile implements MetaData {
 
     @Override
     public String getTitle() {
-        return metaData.getTitle();
+        if (metaData != null)
+            return metaData.getTitle();
+
+        return name;
     }
 
     @Override
     public List<String> getAuthors() {
-        return metaData.getAuthors();
+        if (metaData != null)
+            return metaData.getAuthors();
+
+        return Arrays.asList("<authors unknown>");
     }
 }
