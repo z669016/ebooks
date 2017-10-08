@@ -3,7 +3,6 @@ package nl.putoet.ebooks.meta;
 import org.apache.pdfbox.pdmodel.PDDocument;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Path;
@@ -17,25 +16,21 @@ public class PDFMetaData implements MetaData {
             document = PDDocument.load(is);
             return new PDFMetaData(document);
         } catch (IOException exc) {
-            throw new IllegalArgumentException(exc.getMessage());
+            throw new IllegalArgumentException(exc);
         } finally {
             try {
                 if (document != null) {
                     document.close();
                 }
-            } catch (IOException exc) {
-                throw new IllegalArgumentException(exc.getMessage());
-            }
+            } catch (IOException exc) { /* intentionally left empty */ }
         }
     }
 
     public static MetaData getInstance(final Path path) {
         try (final InputStream is = new FileInputStream(path.toFile())) {
             return getInstance(is);
-        } catch (FileNotFoundException exc) {
-            throw new IllegalArgumentException(exc.getMessage());
         } catch (IOException exc) {
-            throw new IllegalArgumentException(exc.getMessage());
+            throw new IllegalArgumentException(exc);
         }
     }
 
