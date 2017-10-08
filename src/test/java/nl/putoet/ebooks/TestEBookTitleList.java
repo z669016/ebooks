@@ -34,7 +34,7 @@ public class TestEBookTitleList {
         assertEquals("root", list.root, root);
         assertEquals("titles size", 2, list.getTitles().size());
 
-        final EBookTitleList filteredList = list.filter(title -> title.key.startsWith("Web"));
+        final EBookTitleList filteredList = list.filter(title -> title.key.startsWith("web"));
         assertEquals("filteredList", 1, filteredList.getTitles().size());
     }
 
@@ -50,11 +50,11 @@ public class TestEBookTitleList {
 
         final EBookTitleList duplicatesList = list.filter(EBookTitleList.duplicates);
         assertEquals("duplicatesList", 1, duplicatesList.getTitles().size());
-        assertNotNull("duplicate title", duplicatesList.titles.get("50 Android Hacks"));
+        assertNotNull("duplicate title", duplicatesList.titles.get("50 android hacks"));
 
         final EBookTitleList missingList = list.filter(EBookTitleList.missingFormats);
         assertEquals("missingList", 1, missingList.getTitles().size());
-        assertNotNull("missing title", missingList.titles.get("Web Performance in Action: Building Fast Web Pages"));
+        assertNotNull("missing title", missingList.titles.get("web performance in action"));
     }
 
     @Test

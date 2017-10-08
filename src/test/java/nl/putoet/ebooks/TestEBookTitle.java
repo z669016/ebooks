@@ -17,7 +17,7 @@ public class TestEBookTitle {
     public void testConstructor() {
         final EBookTitle title = new EBookTitle(androidHacksEPUB);
         assertNotNull("object", title);
-        assertEquals("key", title.key, "50 Android Hacks");
+        assertEquals("key", title.key, "50 android hacks");
         assertEquals("files size", 1, title.getFiles().size());
         assertArrayEquals("files", new EBookFile[] {androidHacksEPUB}, title.getFiles().toArray());
         assertArrayEquals("formats", new Format[] {Format.EPUB}, title.getFormats());
@@ -39,7 +39,7 @@ public class TestEBookTitle {
         final EBookTitle title = new EBookTitle(androidHacksEPUB);
         title.add(androidHacksPDF);
 
-        assertEquals("{key: 50 Android Hacks, files: [{name:50_Android_Hacks, folder:./target/test-classes, format:EPUB}, {name:50_Android_Hacks, folder:./target/test-classes, format:PDF}]}", title.toString().replace("\\", "/"));
+        assertEquals("{key: 50 android hacks, files: [{name:50_Android_Hacks, folder:./target/test-classes, format:EPUB}, {name:50_Android_Hacks, folder:./target/test-classes, format:PDF}]}", title.toString().replace("\\", "/"));
     }
 
     @Test
