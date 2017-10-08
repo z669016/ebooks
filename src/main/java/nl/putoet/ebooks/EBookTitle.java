@@ -1,8 +1,7 @@
 package nl.putoet.ebooks;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.nio.file.Path;
+import java.util.*;
 
 public class EBookTitle {
     public final String key;
@@ -33,6 +32,15 @@ public class EBookTitle {
             formats.add(file.format);
         }
         return formats.toArray(new Format[formats.size()]);
+    }
+
+    public Path[] getFolders() {
+        final List<Path> folders = new ArrayList<>();
+        for (EBookFile file : files) {
+            if (!folders.contains(file.folder))
+                folders.add(file.folder);
+        }
+        return folders.toArray(new Path[folders.size()]);
     }
 
     public static String key(final EBookFile file) {

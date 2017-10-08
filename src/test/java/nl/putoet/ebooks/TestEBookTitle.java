@@ -2,6 +2,7 @@ package nl.putoet.ebooks;
 
 import org.junit.Test;
 
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import static org.junit.Assert.*;
@@ -30,6 +31,7 @@ public class TestEBookTitle {
         assertFalse("add invalid", title.add(webPerformanceInActionEPUB));
         assertEquals("files size", 3, title.getFiles().size());
         assertArrayEquals("formats", new Format[] {Format.EPUB, Format.MOBI, Format.PDF}, title.getFormats());
+        assertArrayEquals("folders", new Path[] {Paths.get("./target/test-classes")}, title.getFolders());
     }
 
     @Test

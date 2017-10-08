@@ -9,6 +9,9 @@ import static org.junit.Assert.*;
 
 public class TestEBookTitleList {
     private EBookFile androidHacksEPUB = new EBookFile(Paths.get("./target/test-classes/50_Android_Hacks.epub"));
+    private EBookFile androidHacksCopyEPUB = new EBookFile(Paths.get("./target/test-classes/50_Android_Hacks_copy.epub"));
+    private EBookFile androidHacksPDF = new EBookFile(Paths.get("./target/test-classes/50_Android_Hacks.pdf"));
+    private EBookFile androidHacksMOBI = new EBookFile(Paths.get("./target/test-classes/50_Android_Hacks.mobi"));
 
     @Test
     public void testConstructor() {
@@ -30,6 +33,28 @@ public class TestEBookTitleList {
         assertTrue(list.addAll(secondList));
         assertEquals("root", list.root, root);
         assertEquals("titles size", 2, list.getTitles().size());
+
+        final EBookTitleList filteredList = list.filter(title -> title.key.startsWith("Web"));
+        assertEquals("filteredList", 1, filteredList.getTitles().size());
+    }
+
+    @Test
+    public void TestFilter() {
+        final Path root = Paths.get("./target/test-classes");
+        final EBookTitleList list = new EBookTitleList(root);
+        list.add(androidHacksEPUB);
+        list.add(androidHacksCopyEPUB);
+        list.add(androidHacksPDF);
+        list.add(androidHacksMOBI);
+        list.add(Paths.get("./target/test-classes/Web_Performance_in_A.epub"));
+
+        final EBookTitleList duplicatesList = list.filter(EBookTitleList.duplicates);
+        assertEquals("duplicatesList", 1, duplicatesList.getTitles().size());
+        assertNotNull("duplicate title", duplicatesList.titles.get("50 Android Hacks"));
+
+        final EBookTitleList missingList = list.filter(EBookTitleList.missingFormats);
+        assertEquals("missingList", 1, missingList.getTitles().size());
+        assertNotNull("missing title", missingList.titles.get("Web Performance in Action: Building Fast Web Pages"));
     }
 
     @Test
