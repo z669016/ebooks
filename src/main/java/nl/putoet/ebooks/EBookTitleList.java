@@ -7,7 +7,7 @@ import java.util.function.Predicate;
 public class EBookTitleList {
     public final Path root;
 
-    Map<String, EBookTitle> titles = new HashMap<>();
+    Map<String, EBookTitle> titles = new TreeMap<>();
 
     public static Predicate<EBookTitle> duplicates = new Predicate<EBookTitle>() {
         @Override
