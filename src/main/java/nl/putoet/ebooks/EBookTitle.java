@@ -44,7 +44,15 @@ public class EBookTitle {
     }
 
     public static String key(final EBookFile file) {
-        return file.getTitle();
+        return key(file.getTitle());
+    }
+
+    protected static String key(final String title) {
+        return removeSubtitle(title.toLowerCase().trim());
+    }
+
+    private static String removeSubtitle(final String title) {
+        return title.contains(":") ? title.substring(0, title.indexOf(':')) : title;
     }
 
     @Override

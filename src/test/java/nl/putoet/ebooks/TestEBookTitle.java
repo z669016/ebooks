@@ -42,4 +42,11 @@ public class TestEBookTitle {
         assertEquals("{key: 50 Android Hacks, files: [{name:50_Android_Hacks, folder:./target/test-classes, format:EPUB}, {name:50_Android_Hacks, folder:./target/test-classes, format:PDF}]}", title.toString().replace("\\", "/"));
     }
 
+    @Test
+    public void testKey() {
+        assertEquals("plain", "abc", EBookTitle.key("ABC"));
+        assertEquals("trimmed", "abc", EBookTitle.key(" ABC "));
+        assertEquals("sub", "abc", EBookTitle.key("ABC: DEF"));
+    }
+
 }
