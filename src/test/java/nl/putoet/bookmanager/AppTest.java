@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
 public class AppTest {
     @Test
     public void testConstructorFilters() {
-        final String[] args = {"list", "./target/test-classes", "-s", "-r"};
+        final String[] args = {"list", "/Users/ER21JQ/Dropbox/Books/Manning Books/50 Android Hacks", "-s", "-r"};
         final AppCommandLine commandLine = AppCommandLine.getInstance(args);
         final App app = new App(commandLine);
 
@@ -20,7 +20,7 @@ public class AppTest {
 
     @Test
     public void testList() {
-        final String[] args = {"list", "./target/test-classes", "-m", "-r"};
+        final String[] args = {"list", "/Users/ER21JQ/Dropbox/Books/Manning Books/50 Android Hacks", "-m", "-r"};
         final AppCommandLine commandLine = AppCommandLine.getInstance(args);
         final App app = new App(commandLine);
 
@@ -29,7 +29,7 @@ public class AppTest {
 
         final EBookTitleList list = app.list(Paths.get(args[1]));
         assertEquals("root", args[1], list.root.toString().replace("\\", "/"));
-        assertEquals("list", 2, list.getTitles().size());
+        assertEquals("list", 1, list.getTitles().size());
 
         app.print(list);
     }

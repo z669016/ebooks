@@ -10,7 +10,7 @@ public class AppMain {
     private static final int ERROR = 2;
 
     public static void main(String[] args) {
-        System.out.println("[EBooks version 0.2]\n");
+        System.out.println("[EBooks version 0.3]\n");
 
         final AppCommandLine commandLine = AppCommandLine.getInstance(args);
         final String commands[] = commandLine.getCommands();

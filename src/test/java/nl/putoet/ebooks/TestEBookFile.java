@@ -1,5 +1,6 @@
 package nl.putoet.ebooks;
 
+import nl.putoet.bookmanager.Library;
 import org.junit.Test;
 
 import java.nio.file.Path;
@@ -9,9 +10,9 @@ import java.util.Arrays;
 import static org.junit.Assert.assertEquals;
 
 public class TestEBookFile {
-    private static final Path MOBI = Paths.get("./target/test-classes/50_Android_Hacks.mobi");
-    private static final Path EPUB = Paths.get("./target/test-classes/50_Android_Hacks.epub");
-    private static final Path PDF = Paths.get("./target/test-classes/50_Android_Hacks.pdf");
+    private static final Path MOBI = Library.getManning().getPath("50 Android Hacks", "50_Android_Hacks.mobi");
+    private static final Path EPUB = Library.getManning().getPath("50 Android Hacks", "50_Android_Hacks.epub");
+    private static final Path PDF = Library.getManning().getPath("50 Android Hacks", "50_Android_Hacks.pdf");
 
     @Test
     public void testMobi() {
@@ -39,7 +40,7 @@ public class TestEBookFile {
         assertEquals("author", Arrays.asList("Carlos Sessa"), file.getAuthors());
 
         assertEquals("name", "50_Android_Hacks", file.name);
-        assertEquals("path", "./target/test-classes", file.folder.toString().replace("\\", "/"));
+        assertEquals("path", "/Users/ER21JQ/Dropbox/Books/Manning Books/50 Android Hacks", file.folder.toString().replace("\\", "/"));
     }
 
 }

@@ -84,7 +84,7 @@ public class AppCommandLine {
 
     public static void help(final Options options) {
         final String header = "Analyse ebook files in a folder structure ...\n\n";
-        final String footer = "\nPlease report issues at email rene@putoet.nl";
+        final String footer = "\nPlease report issues at email z669016@gmail.nl";
 
         final HelpFormatter formatter = new HelpFormatter();
         formatter.printHelp("ebooks {list <folder>}", header, options, footer, true);
