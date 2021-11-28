@@ -1,11 +1,11 @@
 package nl.putoet.ebooks.meta.mobi;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestPalmDatabaseHeaderRecord {
     @Test
@@ -15,7 +15,7 @@ public class TestPalmDatabaseHeaderRecord {
         final PalmDatabaseHeaderRecord record = PalmDatabaseHeaderRecord.getInstance(is);
 
         System.out.println(record);
-        assertEquals("Offset", 0x00002c98, record.offset);
-        assertEquals("Unique ID", 0x00000002, record.uniqueId);
+        assertEquals(0x00002c98, record.offset);
+        assertEquals(0x00000002, record.uniqueId);
     }
 }

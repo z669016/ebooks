@@ -1,12 +1,11 @@
 package nl.putoet.ebooks.meta.mobi;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TestByteArrayHelper {
     final static byte data[] = {0x2c, (byte) 0x98, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00};
@@ -69,12 +68,12 @@ public class TestByteArrayHelper {
         assertArrayEquals(new byte[] {0x42, 0x4f, 0x4f, 0x4b}, copy);
     }
 
-    @Test (expected = IllegalArgumentException.class)
+    @Test
     public void testGetBytesException() {
         final byte[] data = {0x42, 0x4f, 0x4f, 0x4b, 0x4d, 0x4f, 0x42, 0x49};
         final InputStream is = new ByteArrayInputStream(data);
 
-        ByteArrayHelper.getBytes(is, 20);
+        assertThrows(IllegalArgumentException.class, () -> ByteArrayHelper.getBytes(is, 20));
     }
 
     @Test

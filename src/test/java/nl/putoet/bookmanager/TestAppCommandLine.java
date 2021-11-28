@@ -1,14 +1,13 @@
 package nl.putoet.bookmanager;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TestAppCommandLine {
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testIllegalArguments () {
-        final AppCommandLine line = AppCommandLine.getInstance(new String[] {"-q"});
+        assertThrows(IllegalArgumentException.class, () -> AppCommandLine.getInstance(new String[] {"-q"}));
     }
 
     @Test

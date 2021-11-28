@@ -1,11 +1,11 @@
 package nl.putoet.ebooks.meta.mobi;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestPalmDocHeader {
     @Test
@@ -15,11 +15,11 @@ public class TestPalmDocHeader {
         final PalmDocHeader header = PalmDocHeader.getInstance(is);
 
         System.out.println(header);
-        assertEquals("Compression", 0x0002, header.compression);
-        assertEquals("TextLength", 0x461e0008, header.textLength);
-        assertEquals("RecordCount", 0x0085, header.recordCount);
-        assertEquals("RecordSize", 0x1000, header.recordSize);
-        assertEquals("CurrentPosition", 0x00000000, header.currentPosition);
+        assertEquals(0x0002, header.compression);
+        assertEquals(0x461e0008, header.textLength);
+        assertEquals(0x0085, header.recordCount);
+        assertEquals(0x1000, header.recordSize);
+        assertEquals(0x00000000, header.currentPosition);
 
     }
 }

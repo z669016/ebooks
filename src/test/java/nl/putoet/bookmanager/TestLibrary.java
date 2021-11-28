@@ -1,22 +1,22 @@
 package nl.putoet.bookmanager;
 
-import org.junit.Before;
-import org.junit.Test;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.nio.file.Paths;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class TestLibrary {
-    final static String USER_HOME = "/Users/ER21JQ";
+    final static String USER_HOME = "/Users/renevanputten";
     final static String MANNING = "Dropbox/Books/Manning Books";
 
-    @Before
+    @BeforeEach
     public void setup() {
         System.setProperty("user.home", USER_HOME);
     }

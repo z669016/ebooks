@@ -12,6 +12,5 @@ based on publicly available information on the format from:
 *  Palm Database Format: https://wiki.mobileread.com/wiki/PDB#Palm_Database_Format
 * MOBI format: https://wiki.mobileread.com/wiki/MOBI
 
-For testing I've used a view of my own books: "50 android Hacks" in EPUB, PDF and MOBI format 
-and "Web Performance In Action". These books have been stored in the src/test/resources folders 
-but have not been uploaded to the git repo. 
+For testing I've used some of my own books: "50 android Hacks" in EPUB, PDF and MOBI format 
+and "Web Performance In Action". The tests contain references to a local folder you probably don't have. 
