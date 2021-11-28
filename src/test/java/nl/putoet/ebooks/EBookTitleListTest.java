@@ -1,5 +1,6 @@
 package nl.putoet.ebooks;
 
+import nl.putoet.bookmanager.LibraryTest;
 import org.junit.jupiter.api.Test;
 
 import java.nio.file.Path;
@@ -7,28 +8,28 @@ import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class TestEBookTitleList {
-    public static final String ROOT = "/Users/renevanputten/Dropbox/Books/Manning Books/";
-    private EBookFile androidHacksEPUB = new EBookFile(Paths.get(ROOT + "50 Android Hacks/50_Android_Hacks.epub"));
-    private EBookFile androidHacksPDF = new EBookFile(Paths.get(ROOT + "50 Android Hacks/50_Android_Hacks.pdf"));
-    private EBookFile androidHacksMOBI = new EBookFile(Paths.get(ROOT + "50 Android Hacks/50_Android_Hacks.mobi"));
+class EBookTitleListTest {
+    public static final String ROOT = LibraryTest.MANNING;
+    private final EBookFile androidHacksEPUB = new EBookFile(Paths.get(LibraryTest.ANDROID_HACKS_EPUB));
+    private final EBookFile androidHacksPDF = new EBookFile(Paths.get(LibraryTest.ANDROID_HACKS_PDF));
+    private final EBookFile androidHacksMOBI = new EBookFile(Paths.get(LibraryTest.ANDROID_HACKS_MOBI));
 
     @Test
-    public void testConstructor() {
-        final EBookTitleList list = new EBookTitleList(Paths.get(ROOT + "50 Android Hacks"));
+    void constructor() {
+        final EBookTitleList list = new EBookTitleList(Paths.get(LibraryTest.ANDROID_HACKS));
         assertNotNull(list);
-        assertEquals(ROOT + "50 Android Hacks", list.root.toString().replace("\\", "/"));
+        assertEquals(LibraryTest.ANDROID_HACKS, list.root.toString().replace("\\", "/"));
         assertEquals(0, list.getTitles().size());
     }
 
     @Test
-    public void TestAdd() {
-        final Path root = Paths.get(ROOT + "50 Android Hacks");
+    void add() {
+        final Path root = Paths.get(LibraryTest.ANDROID_HACKS);
         final EBookTitleList list = new EBookTitleList(root);
         assertTrue(list.add(androidHacksEPUB));
 
         final EBookTitleList secondList = new EBookTitleList(Paths.get("."));
-        assertTrue(secondList.add(Paths.get(ROOT + "50 Android Hacks/Web_Performance_in_A.epub")));
+        assertTrue(secondList.add(Paths.get(ROOT + "/Web Performance In Action/Web_Performance_in_A.epub")));
 
         assertTrue(list.addAll(secondList));
         assertEquals(list.root, root);
@@ -39,13 +40,13 @@ public class TestEBookTitleList {
     }
 
     @Test
-    public void TestFilter() {
-        final Path root = Paths.get(ROOT + "50 Android Hacks");
+    void filter() {
+        final Path root = Paths.get(LibraryTest.ANDROID_HACKS);
         final EBookTitleList list = new EBookTitleList(root);
         list.add(androidHacksEPUB);
         list.add(androidHacksPDF);
         list.add(androidHacksMOBI);
-        list.add(Paths.get(ROOT + "Web Performance in Action/Web_Performance_in_A.epub"));
+        list.add(Paths.get(ROOT + "/Web Performance in Action/Web_Performance_in_A.epub"));
 
         final EBookTitleList duplicatesList = list.filter(EBookTitleList.duplicates);
         assertNull(duplicatesList.titles.get("50 android hacks"));
@@ -56,7 +57,7 @@ public class TestEBookTitleList {
     }
 
     @Test
-    public void testToString() {
+    void toStringTest() {
         final EBookTitleList list = new EBookTitleList(Paths.get("./target/test-classes"));
         assertEquals("{root: ./target/test-classes, titles: []}", list.toString().replace("\\", "/"));
     }

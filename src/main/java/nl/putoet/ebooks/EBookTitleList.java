@@ -9,25 +9,17 @@ public class EBookTitleList {
 
     Map<String, EBookTitle> titles = new TreeMap<>();
 
-    public static Predicate<EBookTitle> duplicates = new Predicate<EBookTitle>() {
-        @Override
-        public boolean test(EBookTitle title) {
-            final Set<Format> set = new HashSet<>();
-            for (Format format : title.getFormats()) {
-                if (!set.add(format))
-                    return true;
-            }
-
-            return false;
+    public static Predicate<EBookTitle> duplicates = title -> {
+        final Set<Format> set = new HashSet<>();
+        for (Format format : title.getFormats()) {
+            if (!set.add(format))
+                return true;
         }
+
+        return false;
     };
 
-    public static Predicate<EBookTitle> missingFormats = new Predicate<EBookTitle>() {
-        @Override
-        public boolean test(EBookTitle title) {
-            return Format.missing(title.getFormats()).length > 0;
-        }
-    };
+    public static Predicate<EBookTitle> missingFormats = title -> Format.missing(title.getFormats()).length > 0;
 
     public EBookTitleList(final Path root) {
         this.root = root;
@@ -71,9 +63,8 @@ public class EBookTitleList {
             for (EBookFile file : title.getFiles()) {
                 add(file);
             }
-        } else {
+        } else
             titles.put(title.key, title);
-        }
 
         return true;
     }

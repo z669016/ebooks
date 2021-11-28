@@ -4,9 +4,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class TestFormat {
+class FormatTest {
     @Test
-    public void testIsPdf() {
+    void isPdf() {
         assertFalse(Format.isPDF("pdf"));
         assertTrue(Format.isPDF("test.pdf"));
         assertTrue(Format.isPDF("test.abc.pdf"));
@@ -16,7 +16,7 @@ public class TestFormat {
     }
 
     @Test
-    public void testIsMobi() {
+    void isMobi() {
         assertFalse(Format.isMOBI("mobi"));
         assertTrue(Format.isMOBI("test.mobi"));
         assertTrue(Format.isMOBI("test.abc.mobi"));
@@ -26,7 +26,7 @@ public class TestFormat {
     }
 
     @Test
-    public void testIsEpub() {
+    void isEpub() {
         assertFalse(Format.isEPUB("epub"));
         assertTrue(Format.isEPUB("test.epub"));
         assertTrue(Format.isEPUB("test.abc.epub"));
@@ -36,19 +36,19 @@ public class TestFormat {
     }
 
     @Test
-    public void testIs() {
+    void is() {
         assertEquals(Format.PDF, Format.from("test.pdf"));
         assertEquals(Format.MOBI, Format.from("test.mobi"));
         assertEquals(Format.EPUB, Format.from("test.epub"));
     }
 
     @Test
-    public void testInvalidIs() {
+    void invalidIs() {
         assertThrows(IllegalArgumentException.class, () -> Format.from("test.abc"));
     }
 
     @Test
-    public void testIsValidEbook() {
+    void isValidEbook() {
         assertTrue(Format.isValidEbook("test.pdf"));
         assertTrue(Format.isValidEbook("test.mobi"));
         assertTrue(Format.isValidEbook("test.epub"));
@@ -58,11 +58,11 @@ public class TestFormat {
     }
 
     @Test
-    public void testMissing() {
-        assertArrayEquals(new Format[] {}, Format.missing(new Format[] {Format.EPUB, Format.MOBI, Format.PDF}));
-        assertArrayEquals(new Format[] {Format.PDF}, Format.missing(new Format[] {Format.EPUB, Format.MOBI}));
-        assertArrayEquals(new Format[] {Format.PDF, Format.MOBI}, Format.missing(new Format[] {Format.EPUB}));
-        assertArrayEquals(new Format[] {Format.PDF, Format.EPUB}, Format.missing(new Format[] {Format.MOBI}));
-        assertArrayEquals(new Format[] {Format.PDF, Format.EPUB, Format.MOBI}, Format.missing(new Format[] {}));
+    void missing() {
+        assertArrayEquals(new Format[]{}, Format.missing(new Format[]{Format.EPUB, Format.MOBI, Format.PDF}));
+        assertArrayEquals(new Format[]{Format.PDF}, Format.missing(new Format[]{Format.EPUB, Format.MOBI}));
+        assertArrayEquals(new Format[]{Format.PDF, Format.MOBI}, Format.missing(new Format[]{Format.EPUB}));
+        assertArrayEquals(new Format[]{Format.PDF, Format.EPUB}, Format.missing(new Format[]{Format.MOBI}));
+        assertArrayEquals(new Format[]{Format.PDF, Format.EPUB, Format.MOBI}, Format.missing(new Format[]{}));
     }
 }

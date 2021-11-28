@@ -13,7 +13,7 @@ public class AppMain {
         System.out.println("[EBooks version 0.3]\n");
 
         final AppCommandLine commandLine = AppCommandLine.getInstance(args);
-        final String commands[] = commandLine.getCommands();
+        final String[] commands = commandLine.getCommands();
 
         if (commandLine.help()) {
             commandLine.showHelp();
@@ -21,15 +21,13 @@ public class AppMain {
         }
 
         if (commands.length > 0) {
-            switch (commands[0].toUpperCase()) {
-                case "LIST":
-                    final App app = new App(commandLine);
-                    final EBookTitleList list = app.list(Paths.get(commands[1]));
-                    app.print(list);
-                    System.exit(OK);
-
-                default:
-                    System.out.println("Unknown command '" + commands[0] + "'");
+            if ("LIST".equalsIgnoreCase(commands[0])) {
+                final App app = new App(commandLine);
+                final EBookTitleList list = app.list(Paths.get(commands[1]));
+                app.print(list);
+                System.exit(OK);
+            } else {
+                System.out.println("Unknown command '" + commands[0] + "'");
             }
         }
 

@@ -4,7 +4,6 @@ import nl.putoet.ebooks.meta.mobi.PalmDatabase;
 
 import java.io.InputStream;
 import java.nio.file.Path;
-import java.util.Arrays;
 import java.util.List;
 
 public class MOBIMetaData implements MetaData {
@@ -22,7 +21,7 @@ public class MOBIMetaData implements MetaData {
 
     private MOBIMetaData(final PalmDatabase mobi) {
         this.title = mobi.getMobiHeader().getTitle();
-        this.authors = Arrays.asList(mobi.getMobiHeader().getAuthor());
+        this.authors = List.of(mobi.getMobiHeader().getAuthor());
     }
 
     @Override

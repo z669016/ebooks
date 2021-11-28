@@ -31,7 +31,7 @@ public class EBookTitle {
         for (EBookFile file : files) {
             formats.add(file.format);
         }
-        return formats.toArray(new Format[formats.size()]);
+        return formats.toArray(new Format[0]);
     }
 
     public Path[] getFolders() {
@@ -40,7 +40,7 @@ public class EBookTitle {
             if (!folders.contains(file.folder))
                 folders.add(file.folder);
         }
-        return folders.toArray(new Path[folders.size()]);
+        return folders.toArray(new Path[0]);
     }
 
     public static String key(final EBookFile file) {

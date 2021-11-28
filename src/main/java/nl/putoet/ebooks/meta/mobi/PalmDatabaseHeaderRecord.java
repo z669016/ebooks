@@ -8,12 +8,12 @@ public class PalmDatabaseHeaderRecord {
 
     private static final int SIZE = 0x08;
 
-    static final PalmDatabaseHeaderRecord getInstance(final InputStream fis) {
+    static PalmDatabaseHeaderRecord getInstance(final InputStream fis) {
         final byte[] data = ByteArrayHelper.getBytes(fis, SIZE);
         return extractPalmDatabaseHeaderRecord(data);
     }
 
-    static final PalmDatabaseHeaderRecord extractPalmDatabaseHeaderRecord(byte[] data) {
+    static PalmDatabaseHeaderRecord extractPalmDatabaseHeaderRecord(byte[] data) {
         final int offset = ByteArrayHelper.getInt(data);
         final int numberOfRecords = ByteArrayHelper.getInt(data, 4);
 

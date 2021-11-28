@@ -44,7 +44,7 @@ class ByteArrayHelper {
     }
 
     static String getZeroTerminatedString(final byte[] data, final int offset, final int maxLen) {
-        final byte string[] = new byte[maxLen];
+        final byte[] string = new byte[maxLen];
         final ByteBuffer buffer = ByteBuffer.wrap(data, offset, maxLen);
         buffer.get(string);
         return new String(string, 0, zeroPos(string), Charsets.UTF_8);
@@ -55,7 +55,7 @@ class ByteArrayHelper {
     }
 
     static String getFixedSizeString(final byte[] data, final int offset, final int len) {
-        final byte string[] = new byte[len];
+        final byte[] string = new byte[len];
         final ByteBuffer buffer = ByteBuffer.wrap(data, offset, len);
         buffer.get(string);
         return new String(string, Charsets.UTF_8);
@@ -69,7 +69,7 @@ class ByteArrayHelper {
 
     static byte[] getBytes(final InputStream fis, final int size) {
         try {
-            final byte data[] = new byte[size];
+            final byte[] data = new byte[size];
             if (fis.read(data) < size)
                 throw new IllegalArgumentException("Unexpected end of stream (less than " + size + " bytes available)");
 

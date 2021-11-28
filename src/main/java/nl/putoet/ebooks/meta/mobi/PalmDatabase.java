@@ -30,8 +30,6 @@ public class PalmDatabase {
     public static PalmDatabase getInstance(final Path path) {
         try (final InputStream is = new FileInputStream(path.toFile())) {
             return getInstance(is);
-        } catch (FileNotFoundException exc) {
-            throw new IllegalArgumentException(exc.getMessage());
         } catch (IOException exc) {
             throw new IllegalArgumentException(exc.getMessage());
         }

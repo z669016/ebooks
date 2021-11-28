@@ -8,7 +8,7 @@ import java.nio.file.Paths;
 
 public class Library {
     final static String USER_HOME = System.getProperty("user.home");
-    final static String BOOKS = "Dropbox/Books";
+    final static String BOOKS = USER_HOME + "/Dropbox/Books";
     final static String MANNING = BOOKS + "/Manning Books";
 
     final Path library;
@@ -18,7 +18,7 @@ public class Library {
     }
 
     protected Library(String folder) {
-        library = Paths.get(USER_HOME, folder);
+        library = Paths.get(folder);
     }
 
     public static Library getBooks() {

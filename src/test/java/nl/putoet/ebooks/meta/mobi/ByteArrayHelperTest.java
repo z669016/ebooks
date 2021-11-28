@@ -7,60 +7,60 @@ import java.io.InputStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class TestByteArrayHelper {
-    final static byte data[] = {0x2c, (byte) 0x98, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00};
+class ByteArrayHelperTest {
+    final static byte[] data = {0x2c, (byte) 0x98, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00};
 
     @Test
-    public void testGetShort() {
+    void getShort() {
         assertEquals(0x2c98, ByteArrayHelper.getShort(data));
     }
 
     @Test
-    public void testGetShortOffset() {
+    void getShortOffset() {
         assertEquals(0x0002, ByteArrayHelper.getShort(data, 4));
     }
 
     @Test
-    public void testGetInt() {
+    void getInt() {
         assertEquals(0x00002c98, ByteArrayHelper.getInt(data));
     }
 
     @Test
-    public void testGetIntUnswapped() {
+    void getIntUnswapped() {
         assertEquals(0x2c980000, ByteArrayHelper.getIntUnswapped(data));
     }
 
     @Test
-    public void testGetIntOffsetunswapped() {
+    void getIntUnswappedOffset() {
         assertEquals(0x00020000, ByteArrayHelper.getIntUnswapped(data, 4));
     }
 
     @Test
-    public void testGetZeroterminatedString() {
+    void getZeroTerminatedString() {
         final byte[] data = {0x42, 0x4f, 0x4f, 0x4b, 0x4d, 0x4f, 0x42, 0x49, 0x00, 0x00};
         assertEquals("BOOKMOBI", ByteArrayHelper.getZeroTerminatedString(data, 10));
     }
 
     @Test
-    public void testGetZeroterminatedStringOffset() {
+    void getZeroTerminatedStringOffset() {
         final byte[] data = {0x00, 0x00, 0x42, 0x4f, 0x4f, 0x4b, 0x4d, 0x4f, 0x42, 0x49, 0x00, 0x00};
         assertEquals("BOOKMOBI", ByteArrayHelper.getZeroTerminatedString(data, 2, 10));
     }
 
     @Test
-    public void testGetFixedSizeStringOffset() {
+    void getFixedSizeStringOffset() {
         final byte[] data = {0x00, 0x00, 0x42, 0x4f, 0x4f, 0x4b, 0x4d, 0x4f, 0x42, 0x49};
         assertEquals("BOOKMOBI", ByteArrayHelper.getFixedSizeString(data, 2, 8));
     }
 
     @Test
-    public void testGetFixedSizeString() {
+    void getFixedSizeString() {
         final byte[] data = {0x42, 0x4f, 0x4f, 0x4b, 0x4d, 0x4f, 0x42, 0x49};
         assertEquals("BOOKMOBI", ByteArrayHelper.getFixedSizeString(data));
     }
 
     @Test
-    public void testGetBytes() {
+    void getBytes() {
         final byte[] data = {0x42, 0x4f, 0x4f, 0x4b, 0x4d, 0x4f, 0x42, 0x49};
         final InputStream is = new ByteArrayInputStream(data);
 
@@ -69,7 +69,7 @@ public class TestByteArrayHelper {
     }
 
     @Test
-    public void testGetBytesException() {
+    void getBytesException() {
         final byte[] data = {0x42, 0x4f, 0x4f, 0x4b, 0x4d, 0x4f, 0x42, 0x49};
         final InputStream is = new ByteArrayInputStream(data);
 
@@ -77,7 +77,7 @@ public class TestByteArrayHelper {
     }
 
     @Test
-    public void testAsHexString() {
+    void asHexString() {
         final byte[] data = {0x42, 0x4f, 0x4f, 0x4b};
         assertEquals(" 0x42 0x4f 0x4f 0x4b", ByteArrayHelper.asHexString(data));
     }

@@ -7,10 +7,10 @@ import java.io.InputStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TestPalmDatabaseHeaderRecord {
+class PalmDatabaseHeaderRecordTest {
     @Test
-    public void testRecord() {
-        final byte data[] = {0x2c, (byte) 0x98, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00};
+    void record() {
+        final byte[] data = {0x2c, (byte) 0x98, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00};
         final InputStream is = new ByteArrayInputStream(data);
         final PalmDatabaseHeaderRecord record = PalmDatabaseHeaderRecord.getInstance(is);
 

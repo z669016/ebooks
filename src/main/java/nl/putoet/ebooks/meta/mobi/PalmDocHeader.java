@@ -11,7 +11,7 @@ public class PalmDocHeader {
 
     private static final int SIZE = 0x10;
 
-    public static final PalmDocHeader getInstance(final InputStream is) {
+    public static PalmDocHeader getInstance(final InputStream is) {
         final byte[] data = ByteArrayHelper.getBytes(is, SIZE);
         return extractPalmDocHeader(data);
     }

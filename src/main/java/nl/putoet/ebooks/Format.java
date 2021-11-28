@@ -14,7 +14,7 @@ public enum Format {
     EPUB,
     MOBI;
 
-    private static List<String> names = Stream.of(values())
+    private static final List<String> names = Stream.of(values())
             .map(Enum::name)
             .collect(Collectors.toList());
 
@@ -47,10 +47,10 @@ public enum Format {
     }
 
     public static Format[] missing(final Format[] formats) {
-        final List<Format> missing = new ArrayList<Format>(Arrays.asList(Format.values()));
+        final List<Format> missing = new ArrayList<>(Arrays.asList(Format.values()));
         for (Format format : formats) {
             missing.remove(format);
         }
-        return missing.toArray(new Format[missing.size()]);
+        return missing.toArray(new Format[0]);
     }
 }

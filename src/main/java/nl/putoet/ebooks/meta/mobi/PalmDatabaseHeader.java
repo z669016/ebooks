@@ -9,7 +9,7 @@ public class PalmDatabaseHeader {
     private static final int SIZE = 0x50;
 
     static PalmDatabaseHeader getInstance(final InputStream fis) {
-        final byte data[] = ByteArrayHelper.getBytes(fis, SIZE);
+        final byte[] data = ByteArrayHelper.getBytes(fis, SIZE);
         return extractPalmDatabaseHeader(data);
     }
 

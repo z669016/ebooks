@@ -1,5 +1,6 @@
 package nl.putoet.ebooks.meta.mobi;
 
+import nl.putoet.bookmanager.LibraryTest;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileInputStream;
@@ -11,10 +12,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class TestPalmDatabase {
+class PalmDatabaseTest {
     @Test
-    public void testMobi() throws IOException {
-        try (final InputStream is = new FileInputStream("/Users/renevanputten/Dropbox/Books/Manning Books/50 Android Hacks/50_Android_Hacks.mobi")) {
+    void mobi() throws IOException {
+        try (final InputStream is = new FileInputStream(LibraryTest.ANDROID_HACKS_MOBI)) {
             final PalmDatabase pdb = PalmDatabase.getInstance(is);
             final List<PalmDatabaseHeaderRecord> headerRecords = pdb.getHeaderRecords();
 
